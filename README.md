@@ -78,3 +78,10 @@ yarn build
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## TO test the post mood logged: 
+- Paste the below data in local Storage.
+- Refresh the page.
+- You will see the data in the chart as well as in the History section.
+
+[{"date":"1/15/2025","mood":"😞","note":"oi"},{"date":"1/14/2025","mood":"😞","note":"oi"},{"date":"1/13/2025","mood":"😞","note":"oi"},{"date":"1/12/2025","mood":"😞","note":"oi"}, {"date":"1/11/2025","mood":"😡","note":"oi"}, {"date":"1/10/2025","mood":"😞","note":"oi"}, {"date":"1/09/2025","mood":"😞","note":"oi"}, {"date":"1/08/2025","mood":"😞","note":"oi"}, {"date":"1/07/2025","mood":"😞","note":"oi"}]
