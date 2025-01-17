@@ -8,6 +8,7 @@ const MoodHistory = ({ moodData, deleteMood, setEditingMood, isDarkTheme }) => {
       <h2 className="text-xl font-bold mb-2">Mood History</h2>
       <ul>
         {moodData.map(({ date, mood, note }) => (
+          <>
           <li key={date} className="flex justify-between items-center mb-2">
             <div>
               <span className="text-xl">{mood}</span>  {date}
@@ -28,6 +29,8 @@ const MoodHistory = ({ moodData, deleteMood, setEditingMood, isDarkTheme }) => {
               </button>
             </div>
           </li>
+          <hr className="border-gray-300 my-2" />
+          </>
         ))}
       </ul>
     </div>

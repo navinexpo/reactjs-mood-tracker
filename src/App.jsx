@@ -25,6 +25,14 @@ const App = () => {
     return [];
   });
 
+  const moodMessages = {
+    "😊": "Happy",
+    "😐": "Neutral",
+    "😞": "Sad",
+    "😡": "Angry",
+    "😴": "Sleepy",
+  };
+
   const [editingMood, setEditingMood] = useState(null);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
@@ -76,27 +84,28 @@ const App = () => {
     setEditingMood(null);
   };
 
-    const predictMood = () => {
-      if (moodData.length < 3) return { emoji: "❓", message: "Not enough data to predict your mood." };
-      console.log("moodData:", moodData);
-      const recentMoods = moodData.slice(3).map((entry) => entry.mood);
-  console.log("recentMoods:", recentMoods);
-        const allSame = recentMoods.every((mood) => mood === recentMoods[0]);
-      if (allSame) {
-        const consistentMood = recentMoods[0];
-        const message = getMessageForMood(consistentMood, true);
-        return { emoji: consistentMood, message };
-      }
-        const moodCounts = recentMoods.reduce((counts, mood) => {
-        counts[mood] = (counts[mood] || 0) + 1;
-        return counts;
-      }, {});
-      const modeMood = Object.keys(moodCounts).reduce((a, b) =>
-        moodCounts[a] > moodCounts[b] ? a : b
-      );
-      const message = getMessageForMood(modeMood, false);
-      return { emoji: modeMood, message };
-    };
+  const predictMood = () => {
+    if (moodData.length < 3) return { emoji: "❓", message: "Not enough data to predict your mood." };
+    const recentMoods = moodData.slice(0, 3).map((entry) => entry.mood);
+    const allSame = recentMoods.every((mood) => mood === recentMoods[0]);
+    if (allSame) {
+      const mood = recentMoods[0];  
+      const moodText = moodMessages[mood] || "Unknown mood";
+      return {
+        emoji: mood,
+        message: (
+          <span>
+            You have been feeling <span className="font-bold">{moodText}</span>{" "}
+            for 3 days. You might feel{" "}
+            <span className="font-bold">{moodText}</span> again tomorrow
+            unless you take steps to change it.
+          </span>
+        ),
+      };
+    }
+    return { emoji: "❓", message: "The moods for the last 3 days are mixed. No prediction available." };
+  };
+  
     const prediction = predictMood();
 
   return (
@@ -139,8 +148,10 @@ const App = () => {
             isDarkTheme={isDarkTheme}
           />
           <WeeklySummary moodData={moodData?.slice(0,7)} isDarkTheme={isDarkTheme} />
-          <div className="text-center mt-4">
-          <p className="text-lg">Mood Prediction for Tomorrow:</p>
+
+          <div className={`${isDarkTheme ? 'bg-gray-800' : 'bg-white'} p-4 rounded shadow text-center mt-4`}>
+          
+          <p className="text-xl font-bold">Mood Prediction for Tomorrow</p>
           <p className="text-2xl font-bold">{prediction.emoji}</p>
           <p className=" mt-2">{prediction.message}</p>
 
