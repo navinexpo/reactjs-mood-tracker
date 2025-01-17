@@ -51,7 +51,7 @@ const WeeklySummary = ({ moodData, isDarkTheme }) => {
         </PieChart> :
          <p className="p-4">No data available.</p>}
       </div>
-      <ul className="emoji-list flex">
+      <ul className="emoji-list flex flex-wrap">
         {emojiList?.map(({ emoji, label }) => (
           <li key={emoji} className="flex items-center gap-2 shadow rounded p-2 m-2">
             <button
