@@ -30,7 +30,7 @@ const WeeklySummary = ({ moodData, isDarkTheme }) => {
     >
       <h2 className="text-xl font-bold mb-2">Weekly Summary</h2>
       <div className="flex flex-col items-center">
-        {moodData.length>0 ? <PieChart width={300} height={300}>
+        {moodData?.length >0 ? <PieChart width={300} height={300}>
           <Pie
             data={chartData}
             dataKey="value"
